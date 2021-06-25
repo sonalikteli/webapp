@@ -12,10 +12,18 @@ pipeline{
             ''' 
         }
             }
-            stage('checkout scm') {
+            stage('git checkout') {
             steps {
               git credentialsId: 'Git Password', url: 'https://github.com/sonalikteli/webapp.git'
             }
+            }
+
+            stage('Check-Git-Secrets') {
+              steps {
+                sh 'rm trufflehog || true'
+                sh 'docker run gesellix/trufflehog --json https://github.com/sonalikteli/webapp.git > trufflehog'
+                sh 'cat trufflehog'
+              }
             }
 
             stage('built'){
