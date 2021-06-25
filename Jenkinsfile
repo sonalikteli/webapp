@@ -22,7 +22,7 @@ pipeline{
             stage ('Deploy-To-Tomcat') {
             steps {
                sshagent(['tomcat']) {
-                sh 'scp /var/lib/jenkins/workspace/webapp-pipeline/target/*.war root@18.213.110.23:/opt/apache-tomcat/webapps/webapp.war'
+                sh 'scp /var/lib/jenkins/workspace/webapp-pipeline/target/*.war root@18.213.110.23:/opt/apache-tomcat/webapps/webapp.war disableHostKeyChecking: true'
                }  
            }       
       }
