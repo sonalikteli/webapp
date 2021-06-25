@@ -22,6 +22,7 @@ pipeline{
             steps{
             sh 'mvn package'
             }
+            }
 
             stage ('Deploy-To-Tomcat') {
             steps {
@@ -33,5 +34,4 @@ pipeline{
 
 
     }
-    
-}
+}  
