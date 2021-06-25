@@ -12,7 +12,12 @@ pipeline{
             ''' 
         }
             }
-   
+            stage('checkout scm') {
+            steps {
+              git credentialsId: 'Git Password', url: 'https://github.com/sonalikteli/webapp.git'
+            }
+            }
+
             stage('built'){
             steps{
             sh 'mvn package'
@@ -22,7 +27,7 @@ pipeline{
             stage ('Deploy-To-Tomcat') {
             steps {
                sshagent(['tomcat']) {
-                sh 'scp /var/lib/jenkins/workspace/webapp-pipeline/target/*.war root@18.213.110.23:/opt/apache-tomcat/webapps/webapp.war disableHostKeyChecking: true'
+                sh 'scp /var/lib/jenkins/workspace/devsecops-pipeline/target/.war root@18.213.110.23:/opt/apache-tomcat/webapps/webapp.war disableHostKeyChecking: true'
                }  
            }       
       }
