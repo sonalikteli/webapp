@@ -32,18 +32,21 @@ pipeline{
               sh 'wget "https://raw.githubusercontent.com/cehkunal/webapp/master/owasp-dependency-check.sh" '
               sh 'chmod +x owasp-dependency-check.sh'
               sh 'bash owasp-dependency-check.sh'
-              
+              sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
         
       }
     }
             stage('SAST'){
               steps {
-                withSonarQubeEnv(credentialsId: 'sonarqube') {
+               withSonarQubeEnv(credentialsId: 'sonarqube') {
                  sh 'mvn sonar:sonar'
                  sh 'cat target/sonar/report-task.txt'
+    // some block
 }
+                 
+                }
               }
-            }
+            
             stage('built'){
             steps{
             sh 'mvn package'
