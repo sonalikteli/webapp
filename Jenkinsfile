@@ -36,17 +36,8 @@ pipeline{
         
       }
     }
-            stage('SAST'){
-              steps {
-                 def scannerHome = tool'sonarqube'
-               withSonarQubeEnv(credentialsId: 'sonarqube') {
-                 sh 'mvn sonar:sonar'
-                 sh 'cat target/sonar/report-task.txt'
-    // some block
-}
-                 
-                }
-              }
+                       
+               
             
             stage('built'){
             steps{
