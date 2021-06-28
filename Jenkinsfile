@@ -79,8 +79,9 @@ pipeline{
           stage('Docker hub') {
             steps {
               withCredentials([string(credentialsId: 'docker', variable: 'docker')]) {
-    
-}
+               sh "docker login -u sonali224 -p ${docker}"
+          }
+                 sh "docker push sonali224/mywebapp"
             }
           }
 
