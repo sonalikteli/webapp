@@ -62,7 +62,7 @@ pipeline{
             }
             stage ('Deploy-To-Tomcat-ssh') {
             steps {
-              sshagent(['tomcat']) {
+              sshagent(['tomcatt']) {
                 sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/devsecops-pipeline/target/*.war ec2-user@54.160.109.16:/opt/apache-tomcat/webapps/webapp.war'
            }       
       }
