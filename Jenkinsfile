@@ -36,7 +36,7 @@ pipeline{
         
       }
     }
-           stage ('SAST') {
+           stage ('SAST with Sonar') {
            steps {
                 withSonarQubeEnv('sonar') {
                 sh 'mvn sonar:sonar'
