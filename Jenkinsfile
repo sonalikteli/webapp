@@ -71,7 +71,7 @@ pipeline{
             }
           stage('Docker Build Image') {
             steps {
-              sh 'docker build -t sonali224/mywebapp:${DOCKER_TAG} .'
+              sh 'docker build . -t sonali224/mywebapp'
               sh 'docker images'
             }
           }
