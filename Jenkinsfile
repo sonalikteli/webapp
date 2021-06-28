@@ -81,7 +81,8 @@ pipeline{
               withCredentials([string(credentialsId: 'docker', variable: 'docker')]) {
                sh "docker login -u sonali224 -p ${docker}"
           }
-                 sh "docker push sonali224/mywebapp"
+                 sh  'docker run -dit -p 8080:8080 sonali224/mywebapp'
+                 sh  'docker push sonali224/mywebapp'
             }
           }
 
