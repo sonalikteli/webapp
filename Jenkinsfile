@@ -56,7 +56,7 @@ pipeline{
 
             stage('Nexus'){
               steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'junit', classifier: '', file: 'Webapp.war', type: 'war']], credentialsId: 'nexus', groupId: 'junit', nexusUrl: 'http://54.173.206.92:8081/nexus/', nexusVersion: 'nexus2', protocol: 'http', repository: 'Releases', version: '3.8.1'
+                nexusArtifactUploader artifacts: [[artifactId: 'junit', classifier: '', file: 'WebApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'junit', nexusUrl: 'http://54.173.206.92:8081/nexus/', nexusVersion: 'nexus2', protocol: 'http', repository: 'Releases', version: '3.8.1'
                 
               }
             }
