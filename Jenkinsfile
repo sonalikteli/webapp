@@ -36,7 +36,7 @@ pipeline{
         
       }
     }
-           stage ('SAST with Sonar') {
+           stage ('SAST') {
            steps {
                 withSonarQubeEnv('sonar') {
                 sh 'mvn sonar:sonar'
@@ -63,10 +63,23 @@ pipeline{
             stage ('Deploy-To-Tomcat-ssh') {
             steps {
               sshagent(['tomcatt']) {
-                sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/devsecops-pipeline/target/*.war ec2-user@54.160.109.16:/opt/apache-tomcat/webapps/webapp.war'
+                sh 'scp -o  /var/lib/jenkins/workspace/devsecops-pipeline/target/*.war ec2-user@54.160.109.16:/opt/apache-tomcat/webapps/webapp.war'
            }       
       }
-
+          stage('Docker Build Image') {
+            steps {
+              sh 'docker build -t sonali224/mywebapp:${DOCKER_TAG} .'
+              sh 'docker images'
+            }
+          }
+          
+          stage('Docker hub') {
+            steps {
+              withCredentials([string(credentialsId: 'docker', variable: 'docker')]) {
+    
+}
+            }
+          }
 
     }
 }  
